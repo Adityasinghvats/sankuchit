@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Sankuchit - Image Resizer</title>
+</head>
+<body class="bg-gray-300 font-sans">
+    <div class="container mx-auto p-8 max-w-lg">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-extrabold text-blue-700 tracking-tight">Sankuchit</h1>
+            <p class="text-gray-600 mt-4 text-lg">The easiest way to resize and optimize your images for the web.</p>
+            <p class="text-gray-500 mt-2">Free, fast, and secure image resizing. Supports PNG and JPEG formats.</p>
+        </header>
+
+        <div class="bg-white shadow-md rounded-lg p-8">
+            <form action="" method="post" enctype="multipart/form-data" class="space-y-6">
+                <div>
+                    <label for="width" class="block text-gray-700 text-sm font-bold mb-2">Width (px):</label>
+                    <input step="10" type="number" name="width" id="width" placeholder="Enter width" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+                <div>
+                    <label for="height" class="block text-gray-700 text-sm font-bold mb-2">Height (px):</label>
+                    <input step="10" type="number" name="height" id="height" placeholder="Enter height" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+                <div>
+                    <label for="quality" class="block text-gray-700 text-sm font-bold mb-2">Quality (1-100):</label>
+                    <input type="number" step="5" name="quality" id="quality" placeholder="Enter quality (e.g., 90)" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+                <div>
+                    <label for="format" class="block text-gray-700 text-sm font-bold mb-2">Format:</label>
+                    <select name="format" id="format" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <option value="png">PNG</option>
+                        <option value="jpeg">JPEG</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="file" class="block text-gray-700 text-sm font-bold mb-2">Original File:</label>
+                    <input type="file" name="file" id="file" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+                <div>
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        Resize Image
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <footer class="text-center mt-12 text-gray-500">
+            <p>&copy; 2025 Sankuchit. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
