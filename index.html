@@ -5,51 +5,212 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <title>Sankuchit - Image Resizer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        .card-shadow {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .input-focus:focus {
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+        }
+        .btn-gradient {
+            background: linear-gradient(to right, #4f46e5, #6366f1);
+            transition: all 0.3s ease;
+        }
+        .btn-gradient:hover {
+            background: linear-gradient(to right, #4338ca, #4f46e5);
+            transform: translateY(-1px);
+        }
+        .navbar {
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.8);
+            border-bottom: 1px solid rgba(229, 231, 235, 0.7);
+        }
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: linear-gradient(to right, #4f46e5, #6366f1);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
 </head>
-<body class="bg-gray-300 font-sans">
-    <div class="container mx-auto p-8 max-w-lg">
-        <header class="text-center mb-12">
-            <h1 class="text-4xl font-extrabold text-blue-700 tracking-tight">Sankuchit</h1>
-            <p class="text-gray-600 mt-4 text-lg">The easiest way to resize and optimize your images for the web.</p>
-            <p class="text-gray-500 mt-2">Free, fast, and secure image resizing. Supports PNG and JPEG formats.</p>
+<body class="font-sans">
+    <!-- Navigation Bar -->
+    <nav class="navbar sticky top-0 z-50 py-4 px-6 md:px-8">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <svg class="h-8 w-8 text-indigo-600" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                </svg>
+                <span class="text-xl font-bold text-indigo-700">Sankuchit</span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link text-gray-700 hover:text-indigo-600 font-medium">Home</a>
+                <a href="#features" class="nav-link text-gray-700 hover:text-indigo-600 font-medium">Features</a>
+                <a href="#" class="nav-link text-gray-700 hover:text-indigo-600 font-medium">Pricing</a>
+                <a href="#" class="nav-link text-gray-700 hover:text-indigo-600 font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto p-4 md:p-8 max-w-xl" id="home">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-indigo-700 tracking-tight">Sankuchit</h1>
+            <div class="h-1 w-20 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto my-4 rounded-full"></div>
+            <p class="text-gray-700 mt-4 text-lg font-medium">The easiest way to resize and optimize your images for the web.</p>
+            <p class="text-gray-600 mt-2">Free, fast, and secure image resizing. Supports PNG and JPEG formats.</p>
         </header>
 
-        <div class="bg-white shadow-md rounded-lg p-8">
-            <form action="https://sankuchit.onrender.com/resize" method="post" enctype="multipart/form-data" class="space-y-6">
-                <div>
-                    <label for="width" class="block text-gray-700 text-sm font-bold mb-2">Width (px):</label>
-                    <input step="10" type="number" name="width" id="width" placeholder="Enter width" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        <div class="bg-white card-shadow rounded-xl p-6 md:p-8 border border-gray-100">
+            <form action="https://sankuchit-backend.onrender.com/resize" method="post" enctype="multipart/form-data" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="width" class="block text-gray-700 text-sm font-medium mb-2">Width (px)</label>
+                        <input step="10" type="number" name="width" id="width" placeholder="Enter width" 
+                            class="input-focus shadow-sm border border-gray-300 rounded-lg w-full py-2.5 px-4 text-gray-700 leading-tight focus:outline-none transition duration-200">
+                    </div>
+                    <div>
+                        <label for="height" class="block text-gray-700 text-sm font-medium mb-2">Height (px)</label>
+                        <input step="10" type="number" name="height" id="height" placeholder="Enter height" 
+                            class="input-focus shadow-sm border border-gray-300 rounded-lg w-full py-2.5 px-4 text-gray-700 leading-tight focus:outline-none transition duration-200">
+                    </div>
                 </div>
-                <div>
-                    <label for="height" class="block text-gray-700 text-sm font-bold mb-2">Height (px):</label>
-                    <input step="10" type="number" name="height" id="height" placeholder="Enter height" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="quality" class="block text-gray-700 text-sm font-medium mb-2">Quality (1-100)</label>
+                        <input type="number" step="5" name="quality" id="quality" placeholder="Enter quality (e.g., 90)" 
+                            class="input-focus shadow-sm border border-gray-300 rounded-lg w-full py-2.5 px-4 text-gray-700 leading-tight focus:outline-none transition duration-200">
+                    </div>
+                    <div>
+                        <label for="format" class="block text-gray-700 text-sm font-medium mb-2">Format</label>
+                        <select name="format" id="format" 
+                            class="input-focus shadow-sm border border-gray-300 rounded-lg w-full py-2.5 px-4 text-gray-700 leading-tight focus:outline-none transition duration-200">
+                            <option value="png">PNG</option>
+                            <option value="jpeg">JPEG</option>
+                        </select>
+                    </div>
                 </div>
-                <div>
-                    <label for="quality" class="block text-gray-700 text-sm font-bold mb-2">Quality (1-100):</label>
-                    <input type="number" step="5" name="quality" id="quality" placeholder="Enter quality (e.g., 90)" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                
+                <div class="mt-6">
+                    <label for="file" class="block text-gray-700 text-sm font-medium mb-2">Upload Image</label>
+                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-indigo-500 transition duration-200">
+                        <input type="file" name="file" id="file" class="hidden">
+                        <label for="file" class="cursor-pointer">
+                            <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                                <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <p class="mt-1 text-sm text-gray-600">Click to upload or drag and drop</p>
+                            <p class="mt-1 text-xs text-gray-500">PNG, JPG up to 10MB</p>
+                        </label>
+                    </div>
                 </div>
-                <div>
-                    <label for="format" class="block text-gray-700 text-sm font-bold mb-2">Format:</label>
-                    <select name="format" id="format" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                        <option value="png">PNG</option>
-                        <option value="jpeg">JPEG</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="file" class="block text-gray-700 text-sm font-bold mb-2">Original File:</label>
-                    <input type="file" name="file" id="file" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                </div>
-                <div>
-                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                
+                <div class="mt-8">
+                    <button type="submit" class="btn-gradient w-full text-white font-medium py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         Resize Image
                     </button>
                 </div>
             </form>
         </div>
-
-        <footer class="text-center mt-12 text-gray-500">
-            <p>&copy; 2025 Sankuchit. All rights reserved.</p>
-        </footer>
     </div>
+    <section id="features" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4 md:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-indigo-700 mb-12">Why Choose Sankuchit?</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Feature 1 -->
+                <div class="bg-white rounded-xl p-6 card-shadow text-center">
+                    <div class="bg-indigo-100 p-3 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <svg class="h-8 w-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Perfect Quality</h3>
+                    <p class="text-gray-600">The best online image resizer to resize your images at the highest quality.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="bg-white rounded-xl p-6 card-shadow text-center">
+                    <div class="bg-indigo-100 p-3 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <svg class="h-8 w-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Lightning Fast</h3>
+                    <p class="text-gray-600">This cloud-hosted, highly scalable tool can resize your images within seconds!</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="bg-white rounded-xl p-6 card-shadow text-center">
+                    <div class="bg-indigo-100 p-3 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <svg class="h-8 w-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Easy To Use</h3>
+                    <p class="text-gray-600">Simply upload your image and enter a target height and width. It's as easy as that!</p>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mt-8">
+                <!-- Feature 4 -->
+                <div class="bg-white rounded-xl p-6 card-shadow text-center">
+                    <div class="bg-indigo-100 p-3 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <svg class="h-8 w-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Works Anywhere</h3>
+                    <p class="text-gray-600">Sankuchit is browser-based with no software to install. It works on any platform.</p>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="bg-white rounded-xl p-6 card-shadow text-center">
+                    <div class="bg-indigo-100 p-3 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <svg class="h-8 w-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Privacy Guaranteed</h3>
+                    <p class="text-gray-600">Your images are uploaded via a secure 256-bit encrypted SSL connection and deleted automatically within 6 hours.</p>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="bg-white rounded-xl p-6 card-shadow text-center">
+                    <div class="bg-indigo-100 p-3 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <svg class="h-8 w-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">It's Free</h3>
+                    <p class="text-gray-600">We've resized millions of images for free! There is no software to install, registrations, or watermarks.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="text-center m-10 text-gray-500 text-sm">
+        <p>&copy; 2025 Sankuchit. All rights reserved.</p>
+        <p class="mt-1">Made with ❤️ for the web</p>
+    </footer>
+
+    
 </body>
 </html>
